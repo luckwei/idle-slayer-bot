@@ -59,4 +59,17 @@ def rage(screen, sleeptime=None):
     if sleeptime:
         sleep(sleeptime)
 
-    
+def activate_silver_boxes(screen, sleeptime=None):
+    """
+    Activate silver boxes when available
+    """
+
+    #NULL CONDITION: activate button is not white
+    if pixel(*coords[screen]["activate_boxes"]) != (255, 255, 255):
+        return
+
+    initial_pos = win32api.GetCursorPos()
+
+    click(coords[screen]["activate_boxes"], sleeptime)
+
+    win32api.SetCursorPos(initial_pos)

@@ -30,7 +30,10 @@ coords = {
 
         #special_stage_close
         "close_run": (-532, 913),
-        "man": (-644, 598)
+        "man": (-644, 598),
+
+        #activate_silver_boxes
+        "activate_boxes": (-701, 378)
     },
     "large": {
         #craft_rage
@@ -60,7 +63,10 @@ coords = {
 
         #special_stage_close
         "close_run": (1123, 833),
-        "man": (959, 371)
+        "man": (959, 371),
+
+        #activate_silver_boxes
+        "activate_boxes": (870, 27)
     }
 }
 
