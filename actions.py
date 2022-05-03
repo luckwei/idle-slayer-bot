@@ -9,7 +9,7 @@ from time import sleep
 from devices.mouse import click, click_iter, slide
 from devices.screen import detect_screen
 from devices.keyboard import type
-from gameplay.coords import coords, coords_iter_from_names
+from devices.coords import coords, coords_iter_from_names
 
 def dash(screen, sleeptime=None):
     """
