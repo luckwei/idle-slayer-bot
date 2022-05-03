@@ -1,5 +1,6 @@
 #IMPORTS: 3rd party
-import win32api
+import win32api, win32ui, win32gui
+import subprocess
 
 def detect_screen():
     """
@@ -19,3 +20,15 @@ def detect_screen():
     #Unknown monitor
     print(f"MONITOR NOT RECOGNISED, INFO: {screen_width}")
     return "unknown"
+
+def run_idle_slayer():
+    window_name = "Idle Slayer"
+
+    try:
+        hwnd = win32gui.FindWindow(None, window_name)
+        win = win32ui.CreateWindowFromHandle(hwnd)
+        return True
+    
+    except win32ui.error:
+        subprocess.run("start steam://rungameid/1353300", shell=True)
+        return False
