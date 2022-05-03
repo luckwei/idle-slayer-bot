@@ -6,10 +6,10 @@ from pyautogui import pixel
 from time import sleep
 
 #IMPORTS: Local
-from devices.mouse import click, click_iter, slide
-from devices.screen import detect_screen
-from devices.keyboard import type
-from devices.coords import coords, coords_iter_from_names
+from helper.mouse import click, click_iter, slide
+from helper.screen import detect_screen
+from helper.keyboard import type
+from helper.coords import coords, coords_iter_from_names
 
 def dash(screen, sleeptime=None):
     """
