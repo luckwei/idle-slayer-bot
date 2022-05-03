@@ -88,3 +88,4 @@ coords = {
 
 def coords_iter_from_names(screen, names_iter):
     return [(coords[screen][name], sleeptime) for name, sleeptime in names_iter]
+    
