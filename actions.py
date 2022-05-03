@@ -74,7 +74,7 @@ def claim_divinities(screen):
         send_minions = "send_minions"
     
     click_iter(coords_iter_from_names(screen, [
-        (send_minions, 0.1), (send_minions, 0.1), ("close_tab", 0.2)
+        (send_minions, 0.1, 2), ("close_tab", 0.2)
     ]))
     
     
