@@ -15,6 +15,7 @@ Too complex, would not have helped much and would be more fun to just play manua
 Currently made for my personal set ups
 - Dual monitor mode: 1280x720 | 1920x1080
 - Single monitor mode: 1920x1080
+
 *Will slowly transition to softcoding coordinates to be usable on all displays and monitors*
 
 #### Complicated gameplay is avoided
