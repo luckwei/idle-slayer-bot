@@ -8,7 +8,7 @@ from time import sleep
 #IMPORTS: Local
 from devices.mouse import click, click_iter, slide
 from devices.screen import detect_screen
-from devices.keyboard import key_code
+from devices.keyboard import type
 from gameplay.coords import coords, coords_iter_from_names
 
 def craft_rage(screen):
@@ -29,8 +29,7 @@ def dash(screen, sleeptime=None):
     if pixel(*coords[screen]["dash_end"]) != pixel(*coords[screen]["dash_button"]):
         return
 
-    win32api.keybd_event(key_code["d"], 0, 0, 0)
-    win32api.keybd_event(key_code["d"], 0, win32con.KEYEVENTF_KEYUP, 0)
+    type("d")
 
     if sleeptime:
         sleep(sleeptime)
