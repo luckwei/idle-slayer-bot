@@ -5,7 +5,8 @@ import win32api, win32con
 from time import sleep
 
 key_code = {
-    "d": 0x44
+    "d": 0x44,
+    "w": 0x57
 }
 
 def type(key, sleeptime=None):
