@@ -6,7 +6,7 @@ coords = {
         #craft_rage
         "craft_button": (-1109, 425),
         "temporary_craft": (-1020, 1020),
-        "down_scroll": (-804, 928),
+        "down_scroll": (-804, 962),
         "craft_rage_pill": (-881, 668),
         "rage_button": (-186, 444), #rage
         "exit_menu": (-831, 1013),

@@ -16,12 +16,18 @@ def craft_rage(screen):
     """
     Quickly craft and use the rage pill
     """
+    initial_pos = win32api.GetCursorPos()
+
     click_iter(coords_iter_from_names(screen, [
         ("craft_button", 0.2), ("temporary_craft", 0.1),
-        ("down_scroll", 0.05), ("down_scroll", 0.1),
-        ("craft_rage_pill", 0.1), ("rage_button", 0.1)
+        ("down_scroll", 0.05), ("down_scroll", 0.05),
+        ("craft_rage_pill", 0.01), ("rage_button", 0.01)
     ]))
 
+    win32api.SetCursorPos(initial_pos)
+
+
+## TO DO: NULL CONDITIONS NEED IMPROVEMENTS
 def claim_divinities(screen):
     """
     Claims points and sends minions on trips when ready
@@ -51,7 +57,7 @@ def claim_divinities(screen):
 
     #NULL CONDITION: minions tab is not blinking
     if minions_before == minions_after:
-        click(coords[screen]["close_tab"])
+        click(coords[screen]["close_ascension"])
         return
     
     click(coords[screen]["minions_tab"], 0.1)
@@ -63,7 +69,8 @@ def claim_divinities(screen):
         send_minions = "send_minions"
     
     click_iter(coords_iter_from_names(screen, [
-        (send_minions, 0.1, 2), ("close_tab", 0.2)
+        (send_minions, 0.1), (send_minions, 0.1),
+        ("close_ascension", 0.2)
     ]))
 
     win32api.SetCursorPos(initial_pos)
@@ -177,7 +184,7 @@ def organise_levels(screen):
 
     click_iter(coords_iter_from_names(screen, [
         ("weapon_button", 0.2), ("fifty_button", 0.2), 
-        ("bottom_scroll_button", 0.1, 2)
+        ("bottom_scroll_button", 0.1), ("bottom_scroll_button", 0.1)
     ]))
 
     match screen:
@@ -200,8 +207,8 @@ def organise_levels(screen):
         buy_page(x_pos, Y)
 
     click_iter(coords_iter_from_names(screen, [
-        ("bottom_scroll_button", 0.1, 2), ("max_button", 0.3), 
-        ("upgrade_button", 0.01, 2)
+        ("bottom_scroll_button", 0.1), ("bottom_scroll_button", 0.1),
+        ("max_button", 0.3), ("upgrade_button", 0.01), ("upgrade_button", 0.01)
     ]))
 
     win32api.SetCursorPos(initial_pos)

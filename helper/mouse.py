@@ -8,7 +8,7 @@ from time import sleep
 #IMPORTS: Local
 #from coords import coords
 
-def click(xy, sleeptime=None, n=1, button="left"):
+def click(xy, sleeptime=0.01, button="left"):
     """
     click on an xy coord tuple
     """
@@ -16,20 +16,18 @@ def click(xy, sleeptime=None, n=1, button="left"):
         win32api.SetCursorPos(xy)
         sleep(0.01)
     
-    #Click n times
-    for _ in repeat(None, n):
-        match button:
-            case "left":
-                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
-                sleep(0.01)
-                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
-            case "middle":
-                win32api.mouse_event(win32con.MOUSEEVENTF_MIDDLEDOWN,0,0)
-                sleep(0.01)
-                win32api.mouse_event(win32con.MOUSEEVENTF_MIDDLEUP,0,0)
 
-    if sleeptime:
-        sleep(sleeptime)
+    match button:
+        case "left":
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,0,0)
+            sleep(0.01)
+            win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
+        case "middle":
+            win32api.mouse_event(win32con.MOUSEEVENTF_MIDDLEDOWN,0,0)
+            sleep(0.01)
+            win32api.mouse_event(win32con.MOUSEEVENTF_MIDDLEUP,0,0)
+
+    sleep(sleeptime)
 
 def click_iter(xy_iter):
     """
@@ -38,28 +36,7 @@ def click_iter(xy_iter):
     for xy in xy_iter:
         click(*xy)
 
-# def coords_iter_from_names(screen, names_iter):
-#     return [(coords[screen][name], sleeptime) for name, sleeptime in names_iter]
-
-# def click_names(screen, names_iter):
-#     """
-#     clicks on xy coords given names
-#     """
-#     for name_tuple in names_iter:
-#         if len(name) == 3:
-#             name, sleeptime, n = name_tuple
-#             xy = coords[screen][name]
-#             click(xy, sleeptime, n)
-#         elif len(name) == 2:
-#             name, sleeptime = name_tuple
-#             xy = coords[screen][name]
-#             click(xy, sleeptime)
-#         else:
-#             xy = coords[screen][name]
-#             click(xy)
-        
-
-def slide(start, end, sleeptime=None):
+def slide(start, end, sleeptime=0.01):
     """
     Slides down from one coordinate to another
     """
@@ -74,5 +51,4 @@ def slide(start, end, sleeptime=None):
 
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
 
-    if sleeptime:
-        sleep(sleeptime)
+    sleep(sleeptime)

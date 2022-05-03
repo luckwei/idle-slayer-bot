@@ -9,13 +9,13 @@ key_code = {
     "w": 0x57
 }
 
-def type(key, sleeptime=None):
+def type(key, sleeptime=0.01):
     """
     press on given key
     """
 
     win32api.keybd_event(key_code[key], 0, 0, 0)
+    sleep(0.01)
     win32api.keybd_event(key_code[key], 0, win32con.KEYEVENTF_KEYUP, 0)
 
-    if sleeptime:
-        sleep(sleeptime)
+    sleep(sleeptime)
