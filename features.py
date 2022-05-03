@@ -3,6 +3,7 @@ import win32api, win32con
 from pyautogui import pixel
 
 #IMPORTS: Built-in
+from itertools import repeat
 from time import sleep
 
 #IMPORTS: Local
@@ -136,5 +137,71 @@ def special_stage_close(screen, sleeptime=None):
     initial_pos = win32api.GetCursorPos()
 
     click(coords[screen]["close_run"], sleeptime)
+
+    win32api.SetCursorPos(initial_pos)
+
+
+def organise_levels(screen):
+    """
+    Buys maximum levels in 50s for all equipment except most expensive
+    """
+
+    def buy_page(x_pos, Y):
+        while True:
+            green_buys = [(x_pos, y_pos) for y_pos in Y if pixel(x_pos, y_pos)[1] > 100]
+
+            if len(green_buys) == 0:
+                print("page cleared")
+                return
+            
+            for green_buy in green_buys:
+                click(green_buy, 0.01)
+
+    def buy_page_except_last(x_pos, Y):
+        while True:
+            green_buys = [(x_pos, y_pos) for y_pos in Y[1:] if pixel(x_pos, y_pos)[1] > 100]
+
+            if len(green_buys) == 0:
+                print("page cleared")
+                return
+            
+            for green_buy in green_buys:
+                click(green_buy, 0.01)
+                click(green_buy, 0.01)
+
+    initial_pos = win32api.GetCursorPos()
+
+    if pixel(*coords[screen]["shop_button"])[2] > 50:
+        print("bringing up shop")
+        click(coords[screen]["shop_button"], 0.3)
+
+    click_iter(coords_iter_from_names(screen, [
+        ("weapon_button", 0.2), ("fifty_button", 0.2), 
+        ("bottom_scroll_button", 0.1, 2)
+    ]))
+
+    match screen:
+        case "side":
+            x_pos = -51
+            Y = (912, 821, 724, 633, 533)
+
+        case "large":
+            x_pos = 1840
+            Y = (830, 685, 540, 395, 255)
+     
+    buy_page_except_last(x_pos, Y)
+    
+    for _ in repeat(None, 2):
+        
+        for _ in repeat(None, 10):
+            win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, coords[screen]["bottom_scroll_button"][0], coords[screen]["bottom_scroll_button"][1], 1, 0)
+            sleep(0.01)
+
+        buy_page(x_pos, Y)
+
+    click_iter(coords_iter_from_names(screen, [
+        ("bottom_scroll_button", 0.1, 2), ("max_button", 0.3), 
+        ("upgrade_button", 0.01, 2)
+    ]))
 
     win32api.SetCursorPos(initial_pos)

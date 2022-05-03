@@ -33,7 +33,15 @@ coords = {
         "man": (-644, 598),
 
         #activate_silver_boxes
-        "activate_boxes": (-701, 378)
+        "activate_boxes": (-701, 378),
+
+        #organise_levels
+        "shop_button": (-81, 1011),
+        "weapon_button": (-421, 1018),
+        "fifty_button": (-170, 955),
+        "bottom_scroll_button": (-35, 918),
+        "max_button": (-83, 955),
+        "upgrade_button": (-352, 1014)
     },
     "large": {
         #craft_rage
@@ -66,7 +74,15 @@ coords = {
         "man": (959, 371),
 
         #activate_silver_boxes
-        "activate_boxes": (870, 27)
+        "activate_boxes": (870, 27),
+
+        #organise_levels
+        "shop_button": (1798, 976),
+        "weapon_button": (1284, 984),
+        "fifty_button": (1669, 889),
+        "bottom_scroll_button": (1864, 848),
+        "max_button": (1801, 901),
+        "upgrade_button": (1396, 987)
     }
 }
 
