@@ -17,12 +17,12 @@ Currently made for my personal set ups
 - Single monitor mode: 1920x1080
 *Will slowly transition to softcoding coordinates to be usable on all displays and monitors*
 
-### Complicated gameplay is avoided
+#### Complicated gameplay is avoided
 Features to be developed
 - Completing special stages (skipping them is a current feature)
 
-### Unable to automate in the background
+#### Unable to automate in the background
 This is one of the main features I would like to crack, however either Steam or Idle Slayer has added protection against SendKeys. Further research is needed to develop a solution.
 
-### UI not developed yet
+#### UI not developed yet
 Hotkeys are currently available but a user friendly UI is not developed yet.
