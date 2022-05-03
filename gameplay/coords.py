@@ -13,6 +13,7 @@ coords = {
 
         #dash
         "dash_end": (-1171, 935),
+        "dash_button": (-1160, 935),
 
         #claim divinities
         "ascension_tab": (-1188, 445),
@@ -34,6 +35,7 @@ coords = {
 
         #dash
         "dash_end": (167, 862),
+        "dash_button": (177, 871),
 
         #claim divinities
         "ascension_tab": (134, 132),
