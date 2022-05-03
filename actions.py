@@ -75,7 +75,15 @@ def claim_divinities(screen):
     click_iter(coords_iter_from_names(screen, [
         (send_minions, 0.1, 2), ("close_tab", 0.2)
     ]))
-    
+
+def shortjump(sleeptime=None):
+    """
+    Jumps/shoots arrow
+    """
+    type("w")
+
+    if sleeptime:
+        sleep(sleeptime)
     
 
 
