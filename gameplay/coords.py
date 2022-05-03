@@ -22,7 +22,15 @@ coords = {
         "skilltree_tab": (-1043, 1006),
         "send_minions": (-973, 505),
         "daily": (-1197, 635),
-        "send_minions2": (-1185, 752)
+        "send_minions2": (-1185, 752),
+
+        #special_stage_start
+        "B": (-772, 496),
+        "divinities": (-1187, 440),
+
+        #special_stage_close
+        "close_run": (-532, 913),
+        "man": (-644, 598)
     },
     "large": {
         #craft_rage
@@ -44,7 +52,15 @@ coords = {
         "skilltree_tab": (355, 975),
         "send_minions": (486, 228),
         "daily": (488, 211),
-        "send_minions2": (485, 359)
+        "send_minions2": (485, 359),
+
+        #special_stage_start
+        "B": (763, 199),
+        "divinities": (140, 102),
+
+        #special_stage_close
+        "close_run": (1123, 833),
+        "man": (959, 371)
     }
 }
 
