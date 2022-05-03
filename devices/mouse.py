@@ -1,5 +1,8 @@
-from time import sleep
+#IMPORTS: 3rd party
 import win32api, win32con
+
+#IMPORTS: Built-in
+from time import sleep
 
 def click(xy, sleeptime=None, button="left"):
     if win32api.GetCursorPos() != xy:
