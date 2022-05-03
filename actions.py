@@ -32,11 +32,31 @@ def shortjump(sleeptime=None):
 
     if sleeptime:
         sleep(sleeptime)
-    
 
+def rage(screen, sleeptime=None):
+    """
+    Activate rage uf ready
+    """
 
+    #NULL CONDITION: rage button is not red enough
+    if pixel(*coords[screen]["rage_button"])[0] < 55:
+        return
 
+    initial_pos = win32api.GetCursorPos()
 
+    #Check if side, if so mouse should be on the left
+    if screen == "side" and initial_pos[0] >= 0:
 
+        somewhere_on_side = (-10, 1078)
+
+        click(somewhere_on_side, button="middle")
+
+        win32api.SetCursorPos(initial_pos)
+
+    else:
+        click(initial_pos, button="middle")
+
+    if sleeptime:
+        sleep(sleeptime)
 
     

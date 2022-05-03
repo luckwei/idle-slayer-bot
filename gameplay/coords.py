@@ -8,14 +8,14 @@ coords = {
         "temporary_craft": (-1020, 1020),
         "down_scroll": (-804, 928),
         "craft_rage_pill": (-881, 668),
-        "rage_button": (-185, 450),
+        "rage_button": (-186, 444), #rage
         "exit_menu": (-831, 1013),
 
         #dash
         "dash_end": (-1171, 935),
         "dash_button": (-1160, 935),
 
-        #claim divinities
+        #claim_divinities
         "ascension_tab": (-1188, 445),
         "close_ascension": (-688, 1009),
         "minions_tab": (-928, 1006),
@@ -30,14 +30,14 @@ coords = {
         "temporary_craft": (390, 997),
         "down_scroll": (715, 860),
         "craft_rage_pill": (600, 453),
-        "rage_button": (1644, 177),
+        "rage_button": (1641, 127), #rage
         "exit_menu": (660, 995),
 
         #dash
         "dash_end": (167, 862),
         "dash_button": (177, 871),
 
-        #claim divinities
+        #claim_divinities
         "ascension_tab": (134, 132),
         "close_ascension": (884, 985),
         "minions_tab": (524, 973),
