@@ -6,7 +6,7 @@ from itertools import repeat
 from time import sleep
 
 #IMPORTS: Local
-from coords import coords
+#from coords import coords
 
 def click(xy, sleeptime=None, n=1, button="left"):
     """
@@ -38,25 +38,25 @@ def click_iter(xy_iter):
     for xy in xy_iter:
         click(*xy)
 
-def coords_iter_from_names(screen, names_iter):
-    return [(coords[screen][name], sleeptime) for name, sleeptime in names_iter]
+# def coords_iter_from_names(screen, names_iter):
+#     return [(coords[screen][name], sleeptime) for name, sleeptime in names_iter]
 
-def click_names(screen, names_iter):
-    """
-    clicks on xy coords given names
-    """
-    for name_tuple in names_iter:
-        if len(name) == 3:
-            name, sleeptime, n = name_tuple
-            xy = coords[screen][name]
-            click(xy, sleeptime, n)
-        elif len(name) == 2:
-            name, sleeptime = name_tuple
-            xy = coords[screen][name]
-            click(xy, sleeptime)
-        else:
-            xy = coords[screen][name]
-            click(xy)
+# def click_names(screen, names_iter):
+#     """
+#     clicks on xy coords given names
+#     """
+#     for name_tuple in names_iter:
+#         if len(name) == 3:
+#             name, sleeptime, n = name_tuple
+#             xy = coords[screen][name]
+#             click(xy, sleeptime, n)
+#         elif len(name) == 2:
+#             name, sleeptime = name_tuple
+#             xy = coords[screen][name]
+#             click(xy, sleeptime)
+#         else:
+#             xy = coords[screen][name]
+#             click(xy)
         
 
 def slide(start, end, sleeptime=None):

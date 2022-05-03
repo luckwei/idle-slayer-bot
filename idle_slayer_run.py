@@ -69,9 +69,9 @@ def on_release(key):
                     craft_rage(screen)
                     return
                 
-                if kb.is_pressed("end") or kb.is_pressed("page_up"):
+                if kb.is_pressed("end"):
                     print("--STOPPING--")
-                    playsound.playsound(audio_end, block=False)
+                    playsound(audio_end, block=False)
                     return
 
                 if ms.is_pressed(button="right"):
@@ -90,10 +90,10 @@ def on_release(key):
     
 
 def main():
-    
+    print("PROGRAM STARTING")
     run_idle_slayer()
     keyboard_listener = keyboard.Listener(on_release=on_release)
     keyboard_listener.start()
-
+    keyboard_listener.join()
 
 main()

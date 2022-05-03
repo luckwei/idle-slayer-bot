@@ -9,7 +9,7 @@ from time import sleep
 from helper.mouse import click, click_iter, slide
 from helper.screen import detect_screen
 from helper.keyboard import type
-from helper.coords import coords, coords_iter_from_names
+from helper import coords
 
 def dash(screen, sleeptime=None):
     """
