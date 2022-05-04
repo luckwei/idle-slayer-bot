@@ -116,7 +116,7 @@ def special_stage_start(screen, sleeptime=None):
     
     for y_i in (y_up, y_down):
         slide((x_left, y_i), (x_right, y_i), sleeptime)
-        slide((x_left, y_i), (x_right, y_i), sleeptime)
+        slide((x_right, y_i), (x_left, y_i), sleeptime)
 
     win32api.SetCursorPos(initial_pos)
 
