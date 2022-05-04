@@ -5,6 +5,7 @@ from pyautogui import pixel
 #IMPORTS: Built-in
 from itertools import repeat
 from time import sleep
+import keyboard as kb
 
 #IMPORTS: Local
 from helper.mouse import click, click_iter, slide, scroll
@@ -20,7 +21,7 @@ def craft_rage(screen):
     click_iter(coords_iter_from_names(screen, [
         ("craft_button", 0.2), ("temporary_craft", 0.1),
         ("down_scroll", 0.05), ("down_scroll", 0.05),
-        ("craft_rage_pill", 0.01), ("rage_button", 0.01)
+        ("craft_rage_pill", 0.05), ("rage_button", 0.05)
     ]))
 
     win32api.SetCursorPos(initial_pos)
@@ -188,10 +189,10 @@ def organise_levels(screen):
     
     buy_page(x_pos, Y[1:])
 
-    scroll(COORDS[screen]["bottom_scroll_button"], "up", 10)
+    scroll(COORDS[screen]["bottom_scroll_button"], "up", 11)
     buy_page(x_pos, Y)
 
-    scroll(COORDS[screen]["bottom_scroll_button"], "up", 10)
+    scroll(COORDS[screen]["bottom_scroll_button"], "up", 11)
     buy_page(x_pos, Y)
 
     click_iter(coords_iter_from_names(screen, [
@@ -207,29 +208,87 @@ def beat_stage_2():
     pass
 
 def chest_hunt(screen):
+    """
+    Clicks the chest during a chest hunt, 3rd chest being the saver
+    """
     #NULL CONDITION: Souls outline is present
     if pixel(*COORDS[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
         return
 
+    #NULL CONDITION: TOP BANNER DOES NOT INDICATE SPECIAL CHEST EVENT
+    if pixel(*COORDS[screen]["top_banner"]) not in ((221, 215, 204), (220, 214, 204)):
+        return
+
+
     match screen:
         case "side":
-            X = [-1102, -1005, -912, -816, -721, -627, -529, -435, -341, -245]
+            X = [-1102, -1005, -912, -815, -721, -627, -529, -435, -341, -245]
             Y = [647, 742, 836]
         case "large":
             X = [271, 413, 554, 697, 839, 982, 1125, 1267, 1410, 1553]
             Y = [431, 579, 716]
 
-    completed = (88, 58, 12)
-    unopened_chests = [(x, y) for x in X for y in Y if pixel(x, y) != completed]
+    chest_status_dict = {
+        (255, 235, 4): "saver",
+        (34, 28, 17): "missing",
+        (33, 27, 17): "missing",
+        (64, 44, 7): "missing",
+        (59, 40, 7): "missing",
+        (88, 58, 12): "open",
+        (92, 60, 13): "open",
+        (255, 187, 49): "closed",
+        (245, 280, 47): "closed"
 
-    if len(unopened_chests) == 0:
+    }
+
+    def get_status(identifier):
+        if len(identifier) == 3:
+            color = identifier
+        else:
+            color = pixel(*identifier)
+        
+        if color in chest_status_dict:
+            return chest_status_dict[color]
+        return "unknown"
+
+    def sample_chests():
+        chest_positions = [(x, y) for y in Y for x in X]
+        chest_status = [get_status(chest) for chest in chest_positions]
+
+        saver_index = chest_status.index("saver")
+
+        saver_pos = chest_positions.pop(saver_index)
+
+        chest_status.pop(saver_index)
+
+        return saver_pos, zip(chest_positions, chest_status)
+
+    sleep(2) #add timeout
+
+    try:
+        saver_pos, chest_info = sample_chests()
+    except ValueError:
+        print("too fast: Chest not out yet")
         return
 
-    for chest in unopened_chests:
-        if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
-            click(COORDS[screen]["close_chest_hunt"])
-            break
-        click(chest, 1)
+    chest_opened = 0
 
+    for pos, status in chest_info:
+        
+        if status != "closed":
+            continue
+        click(pos, 1)
+        while get_status(pos) in ("closed", "unknown") and kb.is_pressed("q") is False:
+            if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
+                click(COORDS[screen]["close_chest_hunt"])
+                print("END OF CHEST HUNT")
+                return
+            click(pos, 0.5)
+        chest_opened += 1
+        if chest_opened == 2:
+            click(saver_pos, 1)
+    if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
+        click(COORDS[screen]["close_chest_hunt"])
+        print("END OF CHEST HUNT")
     
     

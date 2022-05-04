@@ -45,7 +45,8 @@ COORDS = {
         "upgrade_button": (-352, 1014),
 
         #chest_hunt
-        "close_chest_hunt": (-682, 1016)
+        "close_chest_hunt": (-682, 1016),
+        "top_banner": (-823, 361)
     },
     "large": {
         #craft_rage
@@ -90,7 +91,8 @@ COORDS = {
         "upgrade_button": (1396, 987),
 
         #chest_hunt
-        "close_chest_hunt": (899, 988)
+        "close_chest_hunt": (899, 988),
+        "top_banner": (645, 1)
     }
 }
 

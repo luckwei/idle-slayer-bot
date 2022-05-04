@@ -40,11 +40,12 @@ def on_release(key):
             return
 
         screen = detect_screen()
-
-        if screen == "side":
+        if screen == "side" and GetWindowText(GetForegroundWindow()) != "Idle Slayer":
             initial_pos = win32api.GetCursorPos()
-            click((-550, 1077), 0.01)
+            somewhere_on_side = (-10, 1078)
+            click(somewhere_on_side, 0.01)
             win32api.SetCursorPos(initial_pos)
+            win32api.SetCursorPos(initial_pos) #second time because of a bug
                 
         print("STARTING")
 
