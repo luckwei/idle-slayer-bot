@@ -32,6 +32,10 @@ def claim_divinities(screen):
     """
     Claims points and sends minions on trips when ready
     """
+    #NULL CONDITION: Souls outline is absent
+    if pixel(*coords[screen]["souls_outline"]) not in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+        return
+
     ascension_before = pixel(*coords[screen]["ascension_tab"]) #sample ascension
     
     #NULL CONDITION: menu is out (white close button is present)
@@ -77,6 +81,11 @@ def claim_divinities(screen):
 
 
 def special_stage_start(screen, sleeptime=None):
+
+    #NULL CONDITION: Souls outline is present
+    if pixel(*coords[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+        return
+
     b_before = pixel(*coords[screen]["B"]) #sample title
 
     #NULL CONDITION: Pixel where title usually is, is not bright
@@ -89,10 +98,6 @@ def special_stage_start(screen, sleeptime=None):
     #NULL CONDITION: Pixel was bright but not a static start run screen
     if b_before != b_after:
         return
-
-    # #NULL CONDITION:
-    # if pixel(*coords[screen]["divinities"]) == (255, 255, 255):
-    #     return       
 
     print("BLOCKED : SPECIAL STAGE DETECTED")
     
@@ -122,6 +127,10 @@ def special_stage_start(screen, sleeptime=None):
 
 
 def special_stage_close(screen, sleeptime=None):
+    #NULL CONDITION: Souls outline is present
+    if pixel(*coords[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+        return
+
     close_run_before = pixel(*coords[screen]["close_run"]) #sample close run
 
     #NULL CONDITION: Pixel where close run button usually is, is not bright
@@ -134,12 +143,8 @@ def special_stage_close(screen, sleeptime=None):
     #NULL CONDITION: Pixel was bright but not a static close run screen
     if close_run_before != close_run_after:
         return
-
-    # #NULL CONDITION: ?
-    # if pixel(*coords[screen]["man"]) == (255, 255, 255):
-    #     return
     
-    print("closable")
+    print("BLOCKED : SPECIAL STAGE TO BE CLOSED")
 
     initial_pos = win32api.GetCursorPos()
 
@@ -212,3 +217,8 @@ def organise_levels(screen):
     ]))
 
     win32api.SetCursorPos(initial_pos)
+
+def beat_stage_2():
+    #side
+    #(-802, 1036) should be (16, 30, 41)
+    pass

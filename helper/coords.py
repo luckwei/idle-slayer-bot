@@ -27,6 +27,7 @@ coords = {
         #special_stage_start
         "B": (-772, 496),
         "divinities": (-1187, 440),
+        "souls_outline": (-236, 416),
 
         #special_stage_close
         "close_run": (-532, 913),
@@ -68,6 +69,7 @@ coords = {
         #special_stage_start
         "B": (763, 199),
         "divinities": (140, 102),
+        "souls_outline": (1567, 80),
 
         #special_stage_close
         "close_run": (1123, 833),
