@@ -42,7 +42,10 @@ coords = {
         "fifty_button": (-170, 955),
         "bottom_scroll_button": (-35, 918),
         "max_button": (-83, 955),
-        "upgrade_button": (-352, 1014)
+        "upgrade_button": (-352, 1014),
+
+        #chest_hunt
+        "close_chest_hunt": (-682, 1016)
     },
     "large": {
         #craft_rage
@@ -84,7 +87,10 @@ coords = {
         "fifty_button": (1669, 889),
         "bottom_scroll_button": (1864, 848),
         "max_button": (1801, 901),
-        "upgrade_button": (1396, 987)
+        "upgrade_button": (1396, 987),
+
+        #chest_hunt
+        "close_chest_hunt": (899, 988)
     }
 }
 

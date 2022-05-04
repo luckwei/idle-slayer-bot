@@ -206,3 +206,31 @@ def beat_stage_2():
     #side
     #(-802, 1036) should be (16, 30, 41)
     pass
+
+def chest_hunt(screen):
+    #NULL CONDITION: Souls outline is present
+    if pixel(*coords[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+        return
+
+    match screen:
+        case "side":
+            X = [-1102, -1005, -912, -816, -721, -627, -529, -435, -341, -245]
+            Y = [647, 742, 836]
+        case "large":
+            X = [271, 413, 554, 697, 839, 982, 1125, 1267, 1410, 1553]
+            Y = [431, 579, 716]
+
+    completed = (88, 58, 12)
+    unopened_chests = [(x, y) for x in X for y in Y if pixel(x, y) != completed]
+
+    if len(unopened_chests) == 0:
+        return
+
+    for chest in unopened_chests:
+        if pixel(*coords[screen]["close_chest_hunt"]) == (255, 255, 255):
+            click(coords[screen]["close_chest_hunt"])
+            break
+        click(chest, 1)
+
+    
+    

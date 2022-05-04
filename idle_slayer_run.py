@@ -14,13 +14,16 @@ from time import sleep
 
 #IMPORTS: Local
 from actions import dash, shortjump, rage, activate_silver_boxes
-from features import craft_rage, claim_divinities, special_stage_start, special_stage_close, organise_levels
+from features import craft_rage, claim_divinities, special_stage_start, special_stage_close, organise_levels, chest_hunt
 from helper.screen import detect_screen, run_idle_slayer
 from helper.mouse import click
 
 def on_release(key):
     if key == Key.f6:
         organise_levels(detect_screen())
+
+    if key == Key.f7:
+        chest_hunt(detect_screen())
 
     if key == Key.f8:
         craft_rage(detect_screen())
@@ -56,6 +59,7 @@ def on_release(key):
             claim_divinities(screen)
             special_stage_start(screen, 0.03)
             special_stage_close(screen, 0.01)
+            chest_hunt(screen)
             
             rage(screen)
             dash(screen)
