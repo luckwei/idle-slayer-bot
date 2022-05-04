@@ -271,6 +271,8 @@ def chest_hunt(screen):
         print("too fast: Chest not out yet")
         return
 
+    initial_pos = win32api.GetCursorPos()
+
     chest_opened = 0
 
     for pos, status in chest_info:
@@ -282,6 +284,7 @@ def chest_hunt(screen):
             if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
                 click(COORDS[screen]["close_chest_hunt"])
                 print("END OF CHEST HUNT")
+                win32api.SetCursorPos(initial_pos)
                 return
             click(pos, 0.5)
         chest_opened += 1
@@ -290,5 +293,6 @@ def chest_hunt(screen):
     if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
         click(COORDS[screen]["close_chest_hunt"])
         print("END OF CHEST HUNT")
+        win32api.SetCursorPos(initial_pos)
     
     
