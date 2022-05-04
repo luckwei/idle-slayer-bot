@@ -8,9 +8,8 @@ from time import sleep
 
 #IMPORTS: Local
 from helper.mouse import click, click_iter, slide, scroll
-from helper.screen import detect_screen
-from helper.keyboard import type
-from helper.coords import coords, coords_iter_from_names
+from helper.coords import coords_iter_from_names
+from helper import COORDS
 
 def craft_rage(screen):
     """
@@ -33,17 +32,17 @@ def claim_divinities(screen):
     Claims points and sends minions on trips when ready
     """
     #NULL CONDITION: Souls outline is absent
-    if pixel(*coords[screen]["souls_outline"]) not in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+    if pixel(*COORDS[screen]["souls_outline"]) not in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
         return
 
-    ascension_before = pixel(*coords[screen]["ascension_tab"]) #sample ascension
+    ascension_before = pixel(*COORDS[screen]["ascension_tab"]) #sample ascension
     
     #NULL CONDITION: menu is out (white close button is present)
-    if pixel(*coords[screen]["close_ascension"]) == (255, 255, 255):
+    if pixel(*COORDS[screen]["close_ascension"]) == (255, 255, 255):
         return
 
     sleep(0.05)
-    ascension_after = pixel(*coords[screen]["ascension_tab"]) #sample ascension again
+    ascension_after = pixel(*COORDS[screen]["ascension_tab"]) #sample ascension again
 
     #NULL CONDITION: ascension tab is not blinking
     if ascension_before == ascension_after:
@@ -55,19 +54,19 @@ def claim_divinities(screen):
         ("ascension_tab", 0.2), ("skilltree_tab", 0.1)
     ]))
 
-    minions_before = pixel(*coords[screen]["minions_tab"]) #sample minion
+    minions_before = pixel(*COORDS[screen]["minions_tab"]) #sample minion
     sleep(0.1)
-    minions_after = pixel(*coords[screen]["minions_tab"]) #sample minion again
+    minions_after = pixel(*COORDS[screen]["minions_tab"]) #sample minion again
 
     #NULL CONDITION: minions tab is not blinking
     if minions_before == minions_after:
-        click(coords[screen]["close_ascension"])
+        click(COORDS[screen]["close_ascension"])
         return
     
-    click(coords[screen]["minions_tab"], 0.1)
+    click(COORDS[screen]["minions_tab"], 0.1)
 
     #CHECK if daily activated
-    if pixel(*coords[screen]["daily"]) == (255, 255, 255):
+    if pixel(*COORDS[screen]["daily"]) == (255, 255, 255):
         send_minions = "send_minions2"
     else:
         send_minions = "send_minions"
@@ -83,17 +82,17 @@ def claim_divinities(screen):
 def special_stage_start(screen, sleeptime=None):
 
     #NULL CONDITION: Souls outline is present
-    if pixel(*coords[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+    if pixel(*COORDS[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
         return
 
-    b_before = pixel(*coords[screen]["B"]) #sample title
+    b_before = pixel(*COORDS[screen]["B"]) #sample title
 
     #NULL CONDITION: Pixel where title usually is, is not bright
     if b_before[1] < 250:
         return
     
     sleep(0.05)
-    b_after = pixel(*coords[screen]["B"]) #sample title again
+    b_after = pixel(*COORDS[screen]["B"]) #sample title again
 
     #NULL CONDITION: Pixel was bright but not a static start run screen
     if b_before != b_after:
@@ -128,17 +127,17 @@ def special_stage_start(screen, sleeptime=None):
 
 def special_stage_close(screen, sleeptime=None):
     #NULL CONDITION: Souls outline is present
-    if pixel(*coords[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+    if pixel(*COORDS[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
         return
 
-    close_run_before = pixel(*coords[screen]["close_run"]) #sample close run
+    close_run_before = pixel(*COORDS[screen]["close_run"]) #sample close run
 
     #NULL CONDITION: Pixel where close run button usually is, is not bright
     if close_run_before[1] < 250:
         return
     
     sleep(0.05)
-    close_run_after = pixel(*coords[screen]["close_run"]) #sample close run again
+    close_run_after = pixel(*COORDS[screen]["close_run"]) #sample close run again
 
     #NULL CONDITION: Pixel was bright but not a static close run screen
     if close_run_before != close_run_after:
@@ -148,7 +147,7 @@ def special_stage_close(screen, sleeptime=None):
 
     initial_pos = win32api.GetCursorPos()
 
-    click(coords[screen]["close_run"], sleeptime)
+    click(COORDS[screen]["close_run"], sleeptime)
 
     win32api.SetCursorPos(initial_pos)
 
@@ -160,8 +159,8 @@ def organise_levels(screen):
 
     initial_pos = win32api.GetCursorPos()
 
-    if pixel(*coords[screen]["shop_button"])[2] > 50:
-        click(coords[screen]["shop_button"], 0.3)
+    if pixel(*COORDS[screen]["shop_button"])[2] > 50:
+        click(COORDS[screen]["shop_button"], 0.3)
 
     click_iter(coords_iter_from_names(screen, [
         ("weapon_button", 0.2), ("fifty_button", 0.2), 
@@ -189,10 +188,10 @@ def organise_levels(screen):
     
     buy_page(x_pos, Y[1:])
 
-    scroll(coords[screen]["bottom_scroll_button"], "up", 10)
+    scroll(COORDS[screen]["bottom_scroll_button"], "up", 10)
     buy_page(x_pos, Y)
 
-    scroll(coords[screen]["bottom_scroll_button"], "up", 10)
+    scroll(COORDS[screen]["bottom_scroll_button"], "up", 10)
     buy_page(x_pos, Y)
 
     click_iter(coords_iter_from_names(screen, [
@@ -209,7 +208,7 @@ def beat_stage_2():
 
 def chest_hunt(screen):
     #NULL CONDITION: Souls outline is present
-    if pixel(*coords[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
+    if pixel(*COORDS[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
         return
 
     match screen:
@@ -227,8 +226,8 @@ def chest_hunt(screen):
         return
 
     for chest in unopened_chests:
-        if pixel(*coords[screen]["close_chest_hunt"]) == (255, 255, 255):
-            click(coords[screen]["close_chest_hunt"])
+        if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
+            click(COORDS[screen]["close_chest_hunt"])
             break
         click(chest, 1)
 

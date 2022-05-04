@@ -1,22 +1,21 @@
 #IMPORTS: 3rd party
-import win32api, win32con
+import win32api
 from pyautogui import pixel
 
 #IMPORTS: Built-in
 from time import sleep
 
 #IMPORTS: Local
-from helper.mouse import click, click_iter, slide
-from helper.screen import detect_screen
+from helper.mouse import click
 from helper.keyboard import type
-from helper import coords
+from helper import COORDS
 
 def dash(screen, sleeptime=None):
     """
     Dash if button is ready, based on color comparison
     """
     #NULL CONDITION: Last part of dash button is different to complete dash button
-    if pixel(*coords[screen]["dash_end"]) != pixel(*coords[screen]["dash_button"]):
+    if pixel(*COORDS[screen]["dash_end"]) != pixel(*COORDS[screen]["dash_button"]):
         return
 
     type("d")
@@ -39,7 +38,7 @@ def rage(screen, sleeptime=None):
     """
 
     #NULL CONDITION: rage button is not red enough
-    if pixel(*coords[screen]["rage_button"])[0] < 55:
+    if pixel(*COORDS[screen]["rage_button"])[0] < 55:
         return
 
     initial_pos = win32api.GetCursorPos()
@@ -65,11 +64,11 @@ def activate_silver_boxes(screen, sleeptime=None):
     """
 
     #NULL CONDITION: activate button is not white
-    if pixel(*coords[screen]["activate_boxes"]) != (255, 255, 255):
+    if pixel(*COORDS[screen]["activate_boxes"]) != (255, 255, 255):
         return
 
     initial_pos = win32api.GetCursorPos()
 
-    click(coords[screen]["activate_boxes"], sleeptime)
+    click(COORDS[screen]["activate_boxes"], sleeptime)
 
     win32api.SetCursorPos(initial_pos)

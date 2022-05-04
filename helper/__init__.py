@@ -1,1 +1,1 @@
-from .coords import coords
+from .coords import COORDS

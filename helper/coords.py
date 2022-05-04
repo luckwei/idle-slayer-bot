@@ -1,7 +1,7 @@
 #side: 1280x720* | 1920x1080
 #large: 1920x1080*
 
-coords = {
+COORDS = {
     "side": {
         #craft_rage
         "craft_button": (-1109, 425),
@@ -95,5 +95,5 @@ coords = {
 }
 
 def coords_iter_from_names(screen, names_iter):
-    return [(coords[screen][name], sleeptime) for name, sleeptime in names_iter]
+    return [(COORDS[screen][name], sleeptime) for name, sleeptime in names_iter]
     

@@ -1,5 +1,5 @@
 #IMPORTS: 3rd party
-import win32api, win32con
+import win32api
 from win32gui import GetWindowText, GetForegroundWindow
 from pyautogui import pixel
 from pynput.keyboard import Key
@@ -10,7 +10,6 @@ from playsound import playsound
 import keyboard as kb
 import mouse as ms
 from itertools import repeat
-from time import sleep
 
 #IMPORTS: Local
 from actions import dash, shortjump, rage, activate_silver_boxes
@@ -30,7 +29,7 @@ def on_release(key):
         
     if key == Key.delete:
         print(f"position is {win32api.GetCursorPos()}")
-        print(f"pixel is {pixel(*win32api.GetCursorPos())}")
+        print(f"pixel is {pixel(*win32api.GetCursorPos())}\n")
 
     if key == Key.insert:
         audio_start = "resources/gaming_lock.wav"

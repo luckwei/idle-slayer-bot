@@ -5,9 +5,6 @@ import win32api, win32con
 from itertools import repeat
 from time import sleep
 
-#IMPORTS: Local
-#from coords import coords
-
 def click(xy, sleeptime=0.01, button="left"):
     """
     click on an xy coord tuple
