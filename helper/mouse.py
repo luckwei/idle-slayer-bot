@@ -52,3 +52,14 @@ def slide(start, end, sleeptime=0.01):
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,0,0)
 
     sleep(sleeptime)
+
+def scroll(xy, direction="up", n=1):
+    """
+    Scrolls at xy coord n number of times in given direction
+    """
+    direction = 1 if direction == "up" else -1
+    x, y = xy
+
+    for _ in repeat(None, n):
+        win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, x, y, direction, 0)
+        sleep(0.01)

@@ -7,7 +7,7 @@ from itertools import repeat
 from time import sleep
 
 #IMPORTS: Local
-from helper.mouse import click, click_iter, slide
+from helper.mouse import click, click_iter, slide, scroll
 from helper.screen import detect_screen
 from helper.keyboard import type
 from helper.coords import coords, coords_iter_from_names
@@ -158,33 +158,9 @@ def organise_levels(screen):
     Buys maximum levels in 50s for all equipment except most expensive
     """
 
-    def buy_page(x_pos, Y):
-        while True:
-            green_buys = [(x_pos, y_pos) for y_pos in Y if pixel(x_pos, y_pos)[1] > 100]
-
-            if len(green_buys) == 0:
-                print("page cleared")
-                return
-            
-            for green_buy in green_buys:
-                click(green_buy, 0.01)
-
-    def buy_page_except_last(x_pos, Y):
-        while True:
-            green_buys = [(x_pos, y_pos) for y_pos in Y[1:] if pixel(x_pos, y_pos)[1] > 100]
-
-            if len(green_buys) == 0:
-                print("page cleared")
-                return
-            
-            for green_buy in green_buys:
-                click(green_buy, 0.01)
-                click(green_buy, 0.01)
-
     initial_pos = win32api.GetCursorPos()
 
     if pixel(*coords[screen]["shop_button"])[2] > 50:
-        print("bringing up shop")
         click(coords[screen]["shop_button"], 0.3)
 
     click_iter(coords_iter_from_names(screen, [
@@ -200,16 +176,24 @@ def organise_levels(screen):
         case "large":
             x_pos = 1840
             Y = (830, 685, 540, 395, 255)
-     
-    buy_page_except_last(x_pos, Y)
-    
-    for _ in repeat(None, 2):
-        
-        for _ in repeat(None, 10):
-            win32api.mouse_event(win32con.MOUSEEVENTF_WHEEL, coords[screen]["bottom_scroll_button"][0], coords[screen]["bottom_scroll_button"][1], 1, 0)
-            sleep(0.01)
 
-        buy_page(x_pos, Y)
+    def buy_page(x_pos, Y):
+        while True:
+            green_buys = [(x_pos, y_pos) for y_pos in Y if pixel(x_pos, y_pos)[1] > 100]
+
+            if len(green_buys) == 0:
+                return
+            
+            for green_buy in green_buys:
+                click(green_buy, 0.01)
+    
+    buy_page(x_pos, Y[1:])
+
+    scroll(coords[screen]["bottom_scroll_button"], "up", 10)
+    buy_page(x_pos, Y)
+
+    scroll(coords[screen]["bottom_scroll_button"], "up", 10)
+    buy_page(x_pos, Y)
 
     click_iter(coords_iter_from_names(screen, [
         ("bottom_scroll_button", 0.1), ("bottom_scroll_button", 0.1),
