@@ -21,80 +21,81 @@ def on_release(key):
     audio_start = "resources/gaming_lock.wav"
     audio_end = "resources/page_turn.wav"
 
-    if key == Key.f6:
-        organise_levels(detect_screen())
+    match key:
+        case Key.f6:
+            organise_levels(detect_screen())
 
-    if key == Key.f7:
-        chest_hunt(detect_screen())
+        case Key.f7:
+            chest_hunt(detect_screen())
 
-    if key == Key.f8:
-        craft_rage(detect_screen())
+        case Key.f8:
+            craft_rage(detect_screen())
+            
+        case Key.delete:
+            print(f"position is {win32api.GetCursorPos()}")
+            print(f"pixel is {pixel(*win32api.GetCursorPos())}\n")
 
+        case Key.insert:
+            playsound(audio_start, block=False)
+            if run_idle_slayer() is False:
+                playsound(audio_end, block=False)
+                return
+
+            screen = detect_screen()
+            if screen == "side" and GetWindowText(GetForegroundWindow()) != "Idle Slayer":
+                initial_pos = win32api.GetCursorPos()
+                somewhere_on_side = (-10, 1078)
+                click(somewhere_on_side, 0.01)
+                win32api.SetCursorPos(initial_pos)
+                win32api.SetCursorPos(initial_pos) #second time because of a bug
+                    
+            print("STARTING")
+
+            print(f"screen is {screen}")
+
+            interval = 0.10
+
+            while True:
+
+                activate_silver_boxes(screen, 0.01)
+                claim_divinities(screen)
+                special_stage_start(screen, 0.03)
+                special_stage_close(screen, 0.01)
+                chest_hunt(screen)
+                
+                rage(screen)
+                dash(screen)
+
+                for _ in repeat(None, 10):
+
+                    if kb.is_pressed("f6"):
+                        organise_levels(screen)
+
+                    if kb.is_pressed("f8"):
+                        craft_rage(screen)
+                        return
+                    
+                    if kb.is_pressed("end"):
+                        print("--STOPPING--")
+                        playsound(audio_end, block=False)
+                        return
+
+                    if ms.is_pressed(button="right"):
+                        print("--STOPPING-- : Right mouse button clicked")
+                        playsound(audio_end, block=False)
+                        return
+
+                    if GetWindowText(GetForegroundWindow()) != "Idle Slayer":
+                        print("--STOPPING-- : Idle Slayer no longer main program")
+                        playsound(audio_end, block=False)
+                        return
+                    
+                    shortjump(interval)
+                    
     if key == Key.esc and kb.is_pressed("shift"):
         close_idle_slayer()
         playsound(audio_end, block=False)
         return False
-        
-    if key == Key.delete:
-        print(f"position is {win32api.GetCursorPos()}")
-        print(f"pixel is {pixel(*win32api.GetCursorPos())}\n")
-
-    if key == Key.insert:
-        playsound(audio_start, block=False)
-        if run_idle_slayer() is False:
-            playsound(audio_end, block=False)
-            return
-
-        screen = detect_screen()
-        if screen == "side" and GetWindowText(GetForegroundWindow()) != "Idle Slayer":
-            initial_pos = win32api.GetCursorPos()
-            somewhere_on_side = (-10, 1078)
-            click(somewhere_on_side, 0.01)
-            win32api.SetCursorPos(initial_pos)
-            win32api.SetCursorPos(initial_pos) #second time because of a bug
-                
-        print("STARTING")
-
-        print(f"screen is {screen}")
-
-        interval = 0.10
-
-        while True:
-
-            activate_silver_boxes(screen, 0.01)
-            claim_divinities(screen)
-            special_stage_start(screen, 0.03)
-            special_stage_close(screen, 0.01)
-            chest_hunt(screen)
-            
-            rage(screen)
-            dash(screen)
-
-            for _ in repeat(None, 10):
-
-                if kb.is_pressed("f6"):
-                    organise_levels(screen)
-
-                if kb.is_pressed("f8"):
-                    craft_rage(screen)
-                    return
-                
-                if kb.is_pressed("end"):
-                    print("--STOPPING--")
-                    playsound(audio_end, block=False)
-                    return
-
-                if ms.is_pressed(button="right"):
-                    print("--STOPPING-- : Right mouse button clicked")
-                    playsound(audio_end, block=False)
-                    return
-
-                if GetWindowText(GetForegroundWindow()) != "Idle Slayer":
-                    print("--STOPPING-- : Idle Slayer no longer main program")
-                    playsound(audio_end, block=False)
-                    return
-                
-                shortjump(interval)
 
 def main():
     print("PROGRAM STARTING")
