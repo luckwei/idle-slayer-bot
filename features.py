@@ -8,7 +8,7 @@ from time import sleep
 #IMPORTS: Local
 from helper.mouse import click, click_iter, slide, scroll
 from helper.coords import coords_iter_from_names
-from helper import COORDS
+from helper import COORDS, WHITE
 
 def craft_rage(screen):
     """
@@ -37,7 +37,7 @@ def claim_divinities(screen):
     ascension_before = pixel(*COORDS[screen]["ascension_tab"]) #sample ascension
     
     #NULL CONDITION: menu is out (white close button is present)
-    if pixel(*COORDS[screen]["close_ascension"]) == (255, 255, 255):
+    if pixel(*COORDS[screen]["close_ascension"]) == WHITE:
         return
 
     sleep(0.05)
@@ -65,7 +65,7 @@ def claim_divinities(screen):
     click(COORDS[screen]["minions_tab"], 0.1)
 
     #CHECK if daily activated
-    if pixel(*COORDS[screen]["daily"]) == (255, 255, 255):
+    if pixel(*COORDS[screen]["daily"]) == WHITE:
         send_minions = "send_minions2"
     else:
         send_minions = "send_minions"
@@ -279,7 +279,7 @@ def chest_hunt(screen):
             continue
         click(pos, 1)
         while get_status(pos) in ("closed", "unknown"):
-            if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
+            if pixel(*COORDS[screen]["close_chest_hunt"]) == WHITE:
                 click(COORDS[screen]["close_chest_hunt"])
                 print("END OF CHEST HUNT")
                 win32api.SetCursorPos(initial_pos)
@@ -288,7 +288,7 @@ def chest_hunt(screen):
         chest_opened += 1
         if chest_opened == 2:
             click(saver_pos, 1)
-    if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
+    if pixel(*COORDS[screen]["close_chest_hunt"]) == WHITE:
         click(COORDS[screen]["close_chest_hunt"])
         print("END OF CHEST HUNT")
         win32api.SetCursorPos(initial_pos)

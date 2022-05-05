@@ -18,6 +18,9 @@ from helper.screen import detect_screen, run_idle_slayer, close_idle_slayer
 from helper.mouse import click
 
 def on_release(key):
+    audio_start = "resources/gaming_lock.wav"
+    audio_end = "resources/page_turn.wav"
+
     if key == Key.f6:
         organise_levels(detect_screen())
 
@@ -37,8 +40,6 @@ def on_release(key):
         print(f"pixel is {pixel(*win32api.GetCursorPos())}\n")
 
     if key == Key.insert:
-        audio_start = "resources/gaming_lock.wav"
-        audio_end = "resources/page_turn.wav"
         playsound(audio_start, block=False)
         if run_idle_slayer() is False:
             playsound(audio_end, block=False)

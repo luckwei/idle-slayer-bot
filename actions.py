@@ -8,7 +8,7 @@ from time import sleep
 #IMPORTS: Local
 from helper.mouse import click
 from helper.keyboard import type
-from helper import COORDS
+from helper import COORDS, WHITE
 
 def dash(screen, sleeptime=None):
     """
@@ -64,7 +64,7 @@ def activate_silver_boxes(screen, sleeptime=None):
     """
 
     #NULL CONDITION: activate button is not white
-    if pixel(*COORDS[screen]["activate_boxes"]) != (255, 255, 255):
+    if pixel(*COORDS[screen]["activate_boxes"]) != WHITE:
         return
 
     initial_pos = win32api.GetCursorPos()
