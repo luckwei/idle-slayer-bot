@@ -20,8 +20,8 @@ COORDS = {
         "close_ascension": (-688, 1009),
         "minions_tab": (-928, 1006),
         "skilltree_tab": (-1043, 1006),
+        "daily": (-960, 506),
         "send_minions": (-973, 505),
-        "daily": (-1197, 635),
         "send_minions2": (-1185, 752),
 
         #special_stage_start
@@ -66,8 +66,8 @@ COORDS = {
         "close_ascension": (884, 985),
         "minions_tab": (524, 973),
         "skilltree_tab": (355, 975),
+        "daily": (479, 220),
         "send_minions": (486, 228),
-        "daily": (488, 211),
         "send_minions2": (485, 359),
 
         #special_stage_start
