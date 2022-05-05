@@ -1,11 +1,9 @@
 #IMPORTS: 3rd party
-import win32api, win32con
+import win32api
 from pyautogui import pixel
 
 #IMPORTS: Built-in
-from itertools import repeat
 from time import sleep
-import keyboard as kb
 
 #IMPORTS: Local
 from helper.mouse import click, click_iter, slide, scroll
@@ -263,7 +261,7 @@ def chest_hunt(screen):
 
         return saver_pos, zip(chest_positions, chest_status)
 
-    sleep(2) #add timeout
+    sleep(3) #add timeout
 
     try:
         saver_pos, chest_info = sample_chests()
@@ -280,7 +278,7 @@ def chest_hunt(screen):
         if status != "closed":
             continue
         click(pos, 1)
-        while get_status(pos) in ("closed", "unknown") and kb.is_pressed("q") is False:
+        while get_status(pos) in ("closed", "unknown"):
             if pixel(*COORDS[screen]["close_chest_hunt"]) == (255, 255, 255):
                 click(COORDS[screen]["close_chest_hunt"])
                 print("END OF CHEST HUNT")
