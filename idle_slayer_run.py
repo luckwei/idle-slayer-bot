@@ -5,16 +5,16 @@ from pyautogui import pixel
 from pynput.keyboard import Key
 from pynput import keyboard
 from playsound import playsound
-
-#IMPORTS: Built-in
 import keyboard as kb
 import mouse as ms
+
+#IMPORTS: Built-in
 from itertools import repeat
 
 #IMPORTS: Local
 from actions import dash, shortjump, rage, activate_silver_boxes
 from features import craft_rage, claim_divinities, special_stage_start, special_stage_close, organise_levels, chest_hunt
-from helper.screen import detect_screen, run_idle_slayer
+from helper.screen import detect_screen, run_idle_slayer, close_idle_slayer
 from helper.mouse import click
 
 def on_release(key):
@@ -26,6 +26,11 @@ def on_release(key):
 
     if key == Key.f8:
         craft_rage(detect_screen())
+
+    if key == Key.esc and kb.is_pressed("shift"):
+        close_idle_slayer()
+        playsound(audio_end, block=False)
+        return False
         
     if key == Key.delete:
         print(f"position is {win32api.GetCursorPos()}")
@@ -87,17 +92,15 @@ def on_release(key):
                     print("--STOPPING-- : Idle Slayer no longer main program")
                     playsound(audio_end, block=False)
                     return
-
                 
                 shortjump(interval)
-
-    
 
 def main():
     print("PROGRAM STARTING")
     run_idle_slayer()
+
     keyboard_listener = keyboard.Listener(on_release=on_release)
     keyboard_listener.start()
     keyboard_listener.join()
-
+    
 main()
