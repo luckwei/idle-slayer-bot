@@ -26,9 +26,22 @@ def run_idle_slayer():
 
     try:
         hwnd = win32gui.FindWindow(None, window_name)
-        win = win32ui.CreateWindowFromHandle(hwnd)
+        win32ui.CreateWindowFromHandle(hwnd)
         return True
     
     except win32ui.error:
         subprocess.run("start steam://rungameid/1353300", shell=True)
+        return False
+
+def close_idle_slayer():
+    window_name = "Idle Slayer"
+
+    try:
+        hwnd = win32gui.FindWindow(None, window_name)
+        win32ui.CreateWindowFromHandle(hwnd)
+
+        subprocess.run('taskkill/im "Idle Slayer.exe"', shell=True)
+        print("IDLE SLAYER CLOSED")
+    
+    except win32ui.error:
         return False
