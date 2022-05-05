@@ -36,6 +36,7 @@ def on_release(key):
             print(f"pixel is {pixel(*win32api.GetCursorPos())}\n")
 
         case Key.insert:
+
             playsound(audio_start, block=False)
             if run_idle_slayer() is False:
                 playsound(audio_end, block=False)
@@ -48,10 +49,8 @@ def on_release(key):
                 click(somewhere_on_side, 0.01)
                 win32api.SetCursorPos(initial_pos)
                 win32api.SetCursorPos(initial_pos) #second time because of a bug
-                    
-            print("STARTING")
-
-            print(f"screen is {screen}")
+    
+            print(f"STARTING:\nscreen is {screen}")
 
             interval = 0.10
 
@@ -73,6 +72,7 @@ def on_release(key):
 
                     if kb.is_pressed("f8"):
                         craft_rage(screen)
+                        playsound(audio_end, block=False)
                         return
                     
                     if kb.is_pressed("end"):
@@ -91,7 +91,7 @@ def on_release(key):
                         return
                     
                     shortjump(interval)
-                    
+
     if key == Key.esc and kb.is_pressed("shift"):
         close_idle_slayer()
         playsound(audio_end, block=False)
