@@ -24,8 +24,6 @@ def craft_rage(screen):
 
     win32api.SetCursorPos(initial_pos)
 
-
-## TO DO: NULL CONDITIONS NEED IMPROVEMENTS
 def claim_divinities(screen):
     """
     Claims points and sends minions on trips when ready
@@ -64,11 +62,11 @@ def claim_divinities(screen):
     
     click(COORDS[screen]["minions_tab"], 0.1)
 
-    #CHECK if daily activated
-    if pixel(*COORDS[screen]["daily"]) == WHITE:
-        send_minions = "send_minions2"
-    else:
+    #CHECK if normal claim all button is green
+    if pixel(*COORDS[screen]["claim_all"]) in [(17, 170, 35), (16, 163, 34)]:
         send_minions = "send_minions"
+    else:
+        send_minions = "send_minions2"
     
     click_iter(coords_iter_from_names(screen, [
         (send_minions, 0.1), (send_minions, 0.1),
@@ -79,6 +77,9 @@ def claim_divinities(screen):
 
 
 def special_stage_start(screen, sleeptime=None):
+    """
+    Starts special stage by sliding on captcha
+    """
 
     #NULL CONDITION: Souls outline is present
     if pixel(*COORDS[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
@@ -101,19 +102,12 @@ def special_stage_start(screen, sleeptime=None):
     
     match screen:
         case "side":
-            x_left = -818
-            x_right = -455
-            y_up = 900
-            y_down = 920
+            x_left, x_right = -818, -455
+            y_up, y_down = 900, 920
 
         case "large":
-            x_left = 687
-            x_right = 1232
-            y_up = 825
-            y_down = 875
-
-        case _:
-            return
+            x_left, x_right = 687, 1232
+            y_up, y_down = 825, 875
 
     initial_pos = win32api.GetCursorPos()
     
@@ -125,6 +119,9 @@ def special_stage_start(screen, sleeptime=None):
 
 
 def special_stage_close(screen, sleeptime=None):
+    """
+    Closes special stage
+    """
     #NULL CONDITION: Souls outline is present
     if pixel(*COORDS[screen]["souls_outline"]) in [(34, 29, 93), (4, 4, 11), (29, 67, 93), (4, 8, 11)]:
         return
@@ -184,6 +181,7 @@ def organise_levels(screen):
             
             for green_buy in green_buys:
                 click(green_buy, 0.01)
+                click(green_buy, 0.01)
     
     buy_page(x_pos, Y[1:])
 
@@ -200,11 +198,6 @@ def organise_levels(screen):
 
     win32api.SetCursorPos(initial_pos)
 
-def beat_stage_2():
-    #side
-    #(-802, 1036) should be (16, 30, 41)
-    pass
-
 def chest_hunt(screen):
     """
     Clicks the chest during a chest hunt, 3rd chest being the saver
@@ -216,7 +209,6 @@ def chest_hunt(screen):
     #NULL CONDITION: TOP BANNER DOES NOT INDICATE SPECIAL CHEST EVENT
     if pixel(*COORDS[screen]["top_banner"]) not in ((221, 215, 204), (220, 214, 204)):
         return
-
 
     match screen:
         case "side":
@@ -293,4 +285,8 @@ def chest_hunt(screen):
         print("END OF CHEST HUNT")
         win32api.SetCursorPos(initial_pos)
     
+def beat_stage_2():
+    #side
+    #(-802, 1036) should be (16, 30, 41)
+    pass
     
