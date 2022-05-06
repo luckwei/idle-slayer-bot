@@ -63,13 +63,13 @@ def claim_divinities(screen):
     click(COORDS[screen]["minions_tab"], 0.1)
 
     #CHECK if normal claim all button is green
-    if pixel(*COORDS[screen]["claim_all"]) in [(17, 170, 35), (16, 163, 34)]:
-        send_minions = "send_minions"
+    if pixel(*COORDS[screen]["claim_all_usual"]) in [(17, 170, 35), (16, 163, 34)]:
+        claim_all = "claim_all_usual"
     else:
-        send_minions = "send_minions2"
+        claim_all = "claim_all_daily"
     
     click_iter(coords_iter_from_names(screen, [
-        (send_minions, 0.1), (send_minions, 0.1),
+        (claim_all, 0.1), (claim_all, 0.1),
         ("close_ascension", 0.2)
     ]))
 

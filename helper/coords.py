@@ -20,9 +20,8 @@ COORDS = {
         "close_ascension": (-688, 1009),
         "minions_tab": (-928, 1006),
         "skilltree_tab": (-1043, 1006),
-        "claim_all": (-1189, 511),
-        "send_minions": (-973, 505),
-        "send_minions2": (-1185, 752),
+        "claim_all_usual": (-1189, 511),
+        "claim_all_daily": (-1189, 605),
 
         #special_stage_start
         "B": (-772, 496),
@@ -66,9 +65,8 @@ COORDS = {
         "close_ascension": (884, 985),
         "minions_tab": (524, 973),
         "skilltree_tab": (355, 975),
-        "claim_all": (100, 230),
-        "send_minions": (486, 228),
-        "send_minions2": (485, 359),
+        "claim_all_usual": (100, 230),
+        "claim_all_daily": (189, 379),
 
         #special_stage_start
         "B": (763, 199),
