@@ -1,13 +1,11 @@
-#IMPORTS: 3rd party
+# IMPORTS: 3rd party
 import win32api, win32con
 
-#IMPORTS: Built-in
+# IMPORTS: Built-in
 from time import sleep
 
-key_code = {
-    "d": 0x44,
-    "w": 0x57
-}
+key_code = {"d": 0x44, "w": 0x57}
+
 
 def type(key, sleeptime=0.01):
     """

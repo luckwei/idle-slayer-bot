@@ -1,4 +1,4 @@
-#IMPORTS: 3rd party
+# IMPORTS: 3rd party
 import win32api
 from win32gui import GetWindowText, GetForegroundWindow
 from pyautogui import pixel
@@ -8,14 +8,22 @@ from playsound import playsound
 import keyboard as kb
 import mouse as ms
 
-#IMPORTS: Built-in
+# IMPORTS: Built-in
 from itertools import repeat
 
-#IMPORTS: Local
+# IMPORTS: Local
 from actions import dash, shortjump, rage, activate_silver_boxes
-from features import craft_rage, claim_divinities, special_stage_start, special_stage_close, organise_levels, chest_hunt
+from features import (
+    craft_rage,
+    claim_divinities,
+    special_stage_start,
+    special_stage_close,
+    organise_levels,
+    chest_hunt,
+)
 from helper.screen import detect_screen, run_idle_slayer, close_idle_slayer
 from helper.mouse import click
+
 
 def on_release(key):
     audio_start = "resources/gaming_lock.wav"
@@ -30,7 +38,7 @@ def on_release(key):
 
         case Key.f8:
             craft_rage(detect_screen())
-            
+
         case Key.delete:
             print(f"position is {win32api.GetCursorPos()}")
             print(f"pixel is {pixel(*win32api.GetCursorPos())}\n")
@@ -43,13 +51,16 @@ def on_release(key):
                 return
 
             screen = detect_screen()
-            if screen == "side" and GetWindowText(GetForegroundWindow()) != "Idle Slayer":
+            if (
+                screen == "side"
+                and GetWindowText(GetForegroundWindow()) != "Idle Slayer"
+            ):
                 initial_pos = win32api.GetCursorPos()
                 somewhere_on_side = (-10, 1078)
                 click(somewhere_on_side, 0.01)
                 win32api.SetCursorPos(initial_pos)
-                win32api.SetCursorPos(initial_pos) #second time because of a bug
-    
+                win32api.SetCursorPos(initial_pos)  # second time because of a bug
+
             print(f"STARTING:\nscreen is {screen}")
 
             interval = 0.10
@@ -61,7 +72,7 @@ def on_release(key):
                 special_stage_start(screen, 0.03)
                 special_stage_close(screen, 0.01)
                 chest_hunt(screen)
-                
+
                 rage(screen)
                 dash(screen)
 
@@ -74,7 +85,7 @@ def on_release(key):
                         craft_rage(screen)
                         playsound(audio_end, block=False)
                         return
-                    
+
                     if kb.is_pressed("end"):
                         print("--STOPPING--")
                         playsound(audio_end, block=False)
@@ -89,13 +100,14 @@ def on_release(key):
                         print("--STOPPING-- : Idle Slayer no longer main program")
                         playsound(audio_end, block=False)
                         return
-                    
+
                     shortjump(interval)
 
     if key == Key.esc and kb.is_pressed("shift"):
         close_idle_slayer()
         playsound(audio_end, block=False)
         return False
+
 
 def main():
     print("PROGRAM STARTING")
@@ -104,5 +116,6 @@ def main():
     keyboard_listener = keyboard.Listener(on_release=on_release)
     keyboard_listener.start()
     keyboard_listener.join()
-    
+
+
 main()
