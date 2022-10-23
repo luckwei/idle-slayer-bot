@@ -2,6 +2,8 @@
 
 The desktop version of the game is available on Steam: https://store.steampowered.com/app/1353300/Idle_Slayer/
 
+// 24-1-22 I have discontinued this for quite some months already, game has gone quite stale, on to other projects! This is no longer under development
+
 ### Motivation
 
 I personally enjoyed the game a lot, first when it was on mobile (even paid to remove ads). However as time went by, to explore the game further and make any progress at all, it had to be played actively for hours with no mechanical element of gameplay, just mindlessly tapping the same buttons and hotkeys in a grinding fashion. Hence instead of stopping the game entirely, I saw it as a coding challenge to try to bring automation to the mid to late-game stages.
